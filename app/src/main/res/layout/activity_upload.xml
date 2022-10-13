@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:text="single"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="14sp"
             tools:ignore="MissingConstraints" />
 
         <Button
@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:text="multiple"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_constraintLeft_toRightOf="@id/btn_clip"
             tools:ignore="MissingConstraints" />
 
@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:text="take one"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="14sp"
             app:layout_constraintLeft_toRightOf="@id/btn_unlimited"
             tools:ignore="MissingConstraints" />
 

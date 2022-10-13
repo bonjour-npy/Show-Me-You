@@ -37,7 +37,7 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="46dp"
                         android:background="@drawable/gray_background"
-                        android:text="Draft box"
+                        android:text="Draft Box"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -46,11 +46,11 @@
 
                     <Button
                         android:id="@+id/upload"
-                        android:layout_width="wrap_content"
+                        android:layout_width="130dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="30dp"
                         android:background="@drawable/gray_background"
-                        android:text="upload drafts"
+                        android:text="Upload"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -75,15 +75,15 @@
                             android:layout_marginTop="8dp"
                             android:text="User: Stephen"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            android:textSize="17sp" />
 
                         <TextView
                             android:id="@+id/profile_user_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="ID: 4104022202"
+                            android:text="Account: 001"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            android:textSize="17sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -112,8 +112,7 @@
                         android:layout_marginStart="35dp"
                         android:layout_marginLeft="35dp"
                         android:layout_marginTop="50dp"
-                        android:textsize="15sp"
-                        android:text="Let me see you"
+                        android:text="This user leaves no words here"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/avatar_icon" />
@@ -151,7 +150,7 @@
                             android:layout_marginLeft="22dp"
                             android:layout_marginBottom="10dp"
                             android:gravity="center"
-                            android:text="Followed"
+                            android:text="Subs"
                             android:textColor="@color/white"
                             android:textSize="10sp"
                             app:layout_constraintBottom_toBottomOf="parent"
