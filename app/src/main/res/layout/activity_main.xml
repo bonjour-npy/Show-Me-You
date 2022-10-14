@@ -37,27 +37,94 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/APPTile" />
 
-    <TextView
+    <ViewFlipper
         android:id="@+id/Run_textid"
-        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ellipsize="marquee"
-
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:text="你好!Howdy!Привет!Bonjour!"
-
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:typeface="serif"
+        android:layout_centerInParent="true"
+        android:autoStart="true"
+        android:background="@drawable/warning_bg"
+        android:flipInterval="1800"
+        android:inAnimation="@anim/slide_in_bottom"
+        android:outAnimation="@anim/slide_out_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageIcon" />
+        app:layout_constraintTop_toBottomOf="@id/imageIcon" >
 
+        <TextView
+            android:id="@+id/tv_warning_content1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="你好!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif"/>
+
+        <TextView
+            android:id="@+id/tv_warning_content2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Bonjour!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif"/>
+
+        <TextView
+            android:id="@+id/tv_warning_content5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="안녕하세요!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif"/>
+
+        <TextView
+            android:id="@+id/tv_warning_content6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="здравей!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif"/>
+
+        <TextView
+            android:id="@+id/tv_warning_content3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Привет!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif"/>
+
+        <TextView
+            android:id="@+id/tv_warning_content4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Howdy!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif"/>
+
+    </ViewFlipper>
 
     <EditText
         android:id="@+id/account"
@@ -70,6 +137,7 @@
         android:hint="@string/main_email_hint"
         android:paddingLeft="16dp"
         android:singleLine="true"
+        android:textColor="@color/purple_700"
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +151,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_background"
+        android:textColor="@color/purple_500"
         android:hint="@string/main_password_hint"
         android:inputType="textPassword"
         android:paddingLeft="16dp"
