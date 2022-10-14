@@ -27,21 +27,19 @@ public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        SharedPreferences sh=getActivity().getSharedPreferences("user",0);
-        String user_id = sh.getString("id","未找到用户ID");
+        SharedPreferences sh = getActivity().getSharedPreferences("user", 0);
+        String user_id = sh.getString("id", "未找到用户ID");
 
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this,new DashboardViewModelFactory(user_id)).get(DashboardViewModel.class);
+        DashboardViewModel dashboardViewModel = new ViewModelProvider(this, new DashboardViewModelFactory(user_id)).get(DashboardViewModel.class);
         //使fragment与ViewModel绑定
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         //获取根视图
 
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-        NewsAdapter newsAdapter=new NewsAdapter(getContext());
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        NewsAdapter newsAdapter = new NewsAdapter(getContext());
         binding.recyclerView.setAdapter(newsAdapter);
         dashboardViewModel.getArryList().observe(getViewLifecycleOwner(), new Observer<List<RecordsBean>>() {
             @Override

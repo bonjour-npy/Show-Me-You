@@ -16,22 +16,22 @@ import retrofit2.http.Query;
 public interface ShareService {
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
-            "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
+            "appId:f42b952877c446b9aade2c8fa4d95942",
+            "appSecret:13905b55d1e3124c746d49b2da962edf5133a"
     })
     @GET("member/photo/share")
     Call<ShareModel> sharedate(@Query("current") int current, @Query("size") int size, @Query("userId") String userId);
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
-            "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
+            "appId:f42b952877c446b9aade2c8fa4d95942",
+            "appSecret:13905b55d1e3124c746d49b2da962edf5133a"
     })
     @GET("member/photo/comment/first")
     Call<PinLunOneModel> pinlundate(@Query("shareId") String shareId);
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
-            "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
+            "appId:f42b952877c446b9aade2c8fa4d95942",
+            "appSecret:13905b55d1e3124c746d49b2da962edf5133a"
     })
     @POST("member/photo/comment/first")
     Call<PinLunBackModel> pinlunfabiao(@Body PinLun pinLun);

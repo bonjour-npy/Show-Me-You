@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -71,7 +70,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="User: Stephen"
+                            android:text="User Name: Stephen\n"
                             android:textColor="@color/white"
                             android:textSize="17sp" />
 
@@ -79,7 +78,7 @@
                             android:id="@+id/profile_user_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Account: 2366353971"
+                            android:text="E-Mail: 2366353971@qq.com"
                             android:textColor="@color/white"
                             android:textSize="17sp" />
 
@@ -107,12 +106,12 @@
                         android:id="@+id/personal_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
                         android:layout_marginStart="35dp"
                         android:layout_marginLeft="35dp"
                         android:layout_marginTop="30dp"
                         android:text="This user leaves no words here"
                         android:textColor="@color/white"
+                        android:textSize="15dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/avatar_icon" />
 

@@ -23,7 +23,7 @@ import retrofit2.http.Query;
 public interface PhotoService {
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
+            "appId:f42b952877c446b9aade2c8fa4d95942",
             "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff",
             "Accept:application/json, text/plain, */*",
             "Content-Type:application/json"
@@ -33,7 +33,7 @@ public interface PhotoService {
     //上传图片文件，获取图片组唯一标识码
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
+            "appId:f42b952877c446b9aade2c8fa4d95942",
             "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
     })
     @POST("member/photo/share/add")
@@ -41,7 +41,7 @@ public interface PhotoService {
     //用户码和图片标识码保存用户图片分享
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
+            "appId:f42b952877c446b9aade2c8fa4d95942",
             "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
     })
     @POST("member/photo/share/change")
@@ -50,49 +50,38 @@ public interface PhotoService {
 
     //1561985398480179200
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
-            "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
+            "appId:f42b952877c446b9aade2c8fa4d95942",
+            "appSecret:13905b55d1e3124c746d49b2da962edf5133a"
     })
     @GET("member/photo/share/save")
     Call<CaoGaoModel> save_photo(@Query("current") int current,@Query("size") int size,@Query("userId") String userId);
     //保存用户分享的动态
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
-            "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
+            "appId:f42b952877c446b9aade2c8fa4d95942",
+            "appSecret:13905b55d1e3124c746d49b2da962edf5133a"
     })
     @POST("member/photo/share/save")
     Call<UploadAll> save_photo(@Body ShareAdd shareAdd);
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
-            "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
+            "appId:f42b952877c446b9aade2c8fa4d95942",
+            "appSecret:13905b55d1e3124c746d49b2da962edf5133a"
     })
     @GET("member/photo/share/detail")
     Call<FabuModel> get_caogaodatail(@Query("shareId") String current, @Query("userId") String userId);
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
-            "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
+            "appId:f42b952877c446b9aade2c8fa4d95942",
+            "appSecret:13905b55d1e3124c746d49b2da962edf5133a"
     })
     @POST("member/photo/share/change")
     Call<UserModel> fabu(@Body FaBu faBu);
 
     @Headers({
-            "appId:f62a6fdf7e924109896fc639a7cfdcc9",
-            "appSecret:33287e5eb1869eb7b4498a9a84a2211a593ff"
+            "appId:f42b952877c446b9aade2c8fa4d95942",
+            "appSecret:13905b55d1e3124c746d49b2da962edf5133a"
     })
     @GET("member/photo/share/myself")
     Call<CaoGaoModel> myself(@Query("current") int current,@Query("size") int size,@Query("userId") String userId);
-    //current=3&size=5&userId=1561985398480179200"
-
-
-    //1561985398480179200
-
-    //1576873625036918784
-
-
-
-
-
 }

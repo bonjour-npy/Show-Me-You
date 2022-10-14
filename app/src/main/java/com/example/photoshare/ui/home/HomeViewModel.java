@@ -18,15 +18,15 @@ import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
 
-    private final MutableLiveData<List<com.example.photoshare.model.minelike.RecordsBean>> newsList=new MutableLiveData<>();
+    private final MutableLiveData<List<com.example.photoshare.model.minelike.RecordsBean>> newsList = new MutableLiveData<>();
 
     List<com.example.photoshare.model.minelike.RecordsBean> shareModeLiast;
 
     private String userid;
 
     public HomeViewModel(String userid) {
-        this.userid=userid;
-        shareModeLiast=new ArrayList<com.example.photoshare.model.minelike.RecordsBean>();
+        this.userid = userid;
+        shareModeLiast = new ArrayList<com.example.photoshare.model.minelike.RecordsBean>();
         getLikeDate();
     }
 
@@ -34,15 +34,15 @@ public class HomeViewModel extends ViewModel {
         return newsList;
     }
 
-    public void getLikeDate(){
-        MineService mineService= RetrofitUtils.getInstance().getRetrofit().create(MineService.class);
-        Call<MineLikeModel> call= mineService.minelike(userid);
+    public void getLikeDate() {
+        MineService mineService = RetrofitUtils.getInstance().getRetrofit().create(MineService.class);
+        Call<MineLikeModel> call = mineService.minelike(userid);
 
         call.enqueue(new Callback<MineLikeModel>() {
             @Override
             public void onResponse(Call<MineLikeModel> call, Response<MineLikeModel> response) {
-                MineLikeModel mineLikeModel= response.body();
-                if (mineLikeModel.getData()!=null){
+                MineLikeModel mineLikeModel = response.body();
+                if (mineLikeModel.getData() != null) {
                     shareModeLiast.addAll(mineLikeModel.getData().getRecords());
                 }
                 newsList.setValue(shareModeLiast);

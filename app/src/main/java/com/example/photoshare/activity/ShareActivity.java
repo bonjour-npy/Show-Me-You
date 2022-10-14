@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.example.photoshare.R;
+import com.example.photoshare.ui.home.HomeFragment;
 import com.example.photoshare.ui.notifications.NotificationsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -75,6 +76,13 @@ public class ShareActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.refresh:
                         Toast.makeText(getApplication(), "Refreshing", Toast.LENGTH_SHORT).show();
+                        Intent intent_refresh = new Intent(ShareActivity.this, HomeFragment.class);
+                        startActivity(intent_refresh);
+                        break;
+                    case R.id.logout:
+                        Toast.makeText(getApplication(), "Logout", Toast.LENGTH_SHORT).show();
+                        Intent intent_logout = new Intent(ShareActivity.this, MainActivity.class);
+                        startActivity(intent_logout);
                         break;
                 }
                 //关闭 滑动菜单
@@ -102,6 +110,13 @@ public class ShareActivity extends AppCompatActivity {
                 break;
             case R.id.refresh:
                 Toast.makeText(this, "Refreshing", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ShareActivity.this, HomeFragment.class);
+                startActivity(intent);
+                break;
+            case R.id.logout:
+                Toast.makeText(getApplication(), "Logout", Toast.LENGTH_SHORT).show();
+                Intent intent_logout = new Intent(ShareActivity.this, MainActivity.class);
+                startActivity(intent_logout);
                 break;
         }
         return true;

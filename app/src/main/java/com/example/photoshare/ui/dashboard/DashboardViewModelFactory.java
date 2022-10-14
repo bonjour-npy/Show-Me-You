@@ -9,14 +9,14 @@ public class DashboardViewModelFactory implements ViewModelProvider.Factory {
 
     private String userid;
 
-    public DashboardViewModelFactory(String userid){
-        this.userid=userid;
+    public DashboardViewModelFactory(String userid) {
+        this.userid = userid;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T)new DashboardViewModel(userid);
+        return (T) new DashboardViewModel(userid);
 
     }
 }

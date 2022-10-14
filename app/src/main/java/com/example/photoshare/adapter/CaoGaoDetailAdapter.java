@@ -18,26 +18,26 @@ import com.example.photoshare.model.fabu.FabuModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CaoGaoDetailAdapter extends RecyclerView.Adapter<LoadImageAdapter.ViewHolder>{
+public class CaoGaoDetailAdapter extends RecyclerView.Adapter<LoadImageAdapter.ViewHolder> {
 
     ArrayList<String> fabuModelList;
     private static final String TAG = "CaoGaoDetailAdapter";
 
-    public CaoGaoDetailAdapter(CaoGaoDetailActivity caoGaoDetailActivity, ArrayList<String> fabuModels){
-        this.fabuModelList=fabuModels;
+    public CaoGaoDetailAdapter(CaoGaoDetailActivity caoGaoDetailActivity, ArrayList<String> fabuModels) {
+        this.fabuModelList = fabuModels;
     }
 
     @NonNull
     @Override
     public LoadImageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater=LayoutInflater.from(parent.getContext());
-        View itemView=layoutInflater.inflate(R.layout.adapter_image,parent,false);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View itemView = layoutInflater.inflate(R.layout.adapter_image, parent, false);
         return new LoadImageAdapter.ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull LoadImageAdapter.ViewHolder holder, int position) {
-        String fabuModel=fabuModelList.get(position);
+        String fabuModel = fabuModelList.get(position);
         Glide.with(holder.itemView.getContext()).load(fabuModel).into(holder.ivImage);
     }
 
@@ -46,11 +46,12 @@ public class CaoGaoDetailAdapter extends RecyclerView.Adapter<LoadImageAdapter.V
         return fabuModelList.size();
     }
 
-    static class caogaoViewHolder extends RecyclerView.ViewHolder{
-            ImageView imageView;
+    static class caogaoViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+
         public caogaoViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.iv_image);
+            imageView = itemView.findViewById(R.id.iv_image);
         }
     }
 }

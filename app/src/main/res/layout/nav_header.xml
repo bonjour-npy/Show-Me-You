@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/user_mail"
-        android:text="Account Number: 1"
+        android:text="User Name: Stephen"
         android:textColor="@color/black"
         android:textSize="15dp" />
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="19dp"
-        android:text="App Motto: Let me see you"
+        android:text="E-Mail: 2366353971@qq.com"
         android:textColor="@color/black"
         android:textSize="15dp" />
 

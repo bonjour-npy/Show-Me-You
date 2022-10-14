@@ -72,8 +72,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.newsViewHolder
     @Override
     public void onBindViewHolder(@NonNull newsViewHolder holder, @SuppressLint("RecyclerView") int position) {
         RecordsBean share = sharelist.get(position);
-        holder.name.setText(share.getUsername());
-        holder.title.setText(share.getTitle());
+        holder.name.setText("User name: " + share.getUsername());
+        holder.title.setText("Title: " + share.getTitle());
 
         SharedPreferences sh = context.getSharedPreferences("user", 0);
         userid = sh.getString("id", String.valueOf(1));
@@ -84,8 +84,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.newsViewHolder
                     .into(holder.photo);
         } else {
             Glide.with(holder.itemView.getContext())
-                    .load(R.drawable.ic_dashboard_black_24dp)
+                    .load(R.drawable.ic_home_black_24dp)
                     .into(holder.photo);
+        }
+
+        //1578043022933889024
+        if (sharelist.get(position).getHasLike().toString().equals("true")) {
+            holder.dianzan.setImageResource(R.mipmap.zan_click);
+        } else {
+            holder.dianzan.setImageResource(R.mipmap.zan_unclick);
         }
 
 
@@ -98,7 +105,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.newsViewHolder
                 } else {
                     holder.shoucang.setImageResource(R.mipmap.col_unclick);
                 }
-
             }
         });
 
@@ -183,7 +189,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.newsViewHolder
                 }
             });
         }
-
-
     }
+
 }

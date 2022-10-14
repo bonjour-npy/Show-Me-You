@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         SharedPreferences sh = getActivity().getSharedPreferences("user", 0);
-        String user_id = sh.getString("id", "未找到用户ID");
+        String user_id = sh.getString("id", "Can't find user ID");
 
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this, new HomeViewModelFactoyr(user_id)).get(HomeViewModel.class);
@@ -39,8 +39,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         //获取根视图
-
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));  // 上下文
         MineLikeAdapter mineLikeAdapter = new MineLikeAdapter(getContext());
         binding.recyclerView.setAdapter(mineLikeAdapter);
         homeViewModel.getArryList().observe(getViewLifecycleOwner(), new Observer<List<com.example.photoshare.model.minelike.RecordsBean>>() {
