@@ -35,17 +35,16 @@ import retrofit2.Response;
 public class FindDetailActivity extends AppCompatActivity {
 
     private ActivityFindDetailBinding activityFindDetailBinding;
-
     private FindDetailAdapter mAdapter;
     //图片展示适配器
 
     private String caogao_title;
     private String caogao_content;
 
-
     private ArrayList<String> images = new ArrayList<String>();
     private static final String TAG = "CaoGaoDetailActivity";
 
+    public String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +52,13 @@ public class FindDetailActivity extends AppCompatActivity {
         activityFindDetailBinding = ActivityFindDetailBinding.inflate(getLayoutInflater());
         View view = activityFindDetailBinding.getRoot();
         setContentView(view);
-
         Intent intent = getIntent();
         String sharedate = intent.getStringExtra("id");
         String share_puserid = intent.getStringExtra("follow");
         String share_if_follow = intent.getStringExtra("if_follow");
         SharedPreferences sh = getSharedPreferences("user", 0);
         String user_id = sh.getString("id", "Can't find user ID");
+        String share_id = sh.getString("shareId", "Can't find share_id");
 
         if (share_if_follow.equals("false")) {
             activityFindDetailBinding.detailFollow.setText("Follow");
@@ -75,7 +74,7 @@ public class FindDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (share_if_follow.equals("")) {
+                if (share_if_follow.equals("false")) {
                     MineService mineService = RetrofitUtils.getInstance().getRetrofit().create(MineService.class);
                     Call<ShoucangModel> call = mineService.follow(share_puserid, user_id);
                     call.enqueue(new Callback<ShoucangModel>() {
@@ -104,27 +103,22 @@ public class FindDetailActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<ShoucangModel> call, Throwable t) {
-
                         }
                     });
-
                 }
-
             }
         });
 
         activityFindDetailBinding.addPinlun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 PinLun pinLun = new PinLun();
                 pinLun.setContent(activityFindDetailBinding.pinlunContent.getText().toString());
-                pinLun.setUserName("Umbrella".toString());
+                pinLun.setUserName("倪培洋".toString());
                 pinLun.setUserId(user_id);
                 Intent intent = getIntent();
-                pinLun.setShareId("12");
+                pinLun.setShareId(id);
                 Log.d(TAG, "" + user_id + " " + intent.getStringExtra("id"));
-
                 ShareService shareService = RetrofitUtils.getInstance().getRetrofit().create(ShareService.class);
                 Call<PinLunBackModel> call = shareService.pinlunfabiao(pinLun);
                 call.enqueue(new Callback<PinLunBackModel>() {
@@ -177,6 +171,7 @@ public class FindDetailActivity extends AppCompatActivity {
                 mAdapter = new FindDetailAdapter(FindDetailActivity.this, images);
                 activityFindDetailBinding.caogaoRv.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
+                id=response.body().getData().getId();
 
                 find_pinlun(response.body().getData().getId());
             }
@@ -190,7 +185,7 @@ public class FindDetailActivity extends AppCompatActivity {
 
     public void find_pinlun(String shareId) {
         ShareService shareService = RetrofitUtils.getInstance().getRetrofit().create(ShareService.class);
-        Call<PinLunOneModel> call = shareService.pinlundate("12");
+        Call<PinLunOneModel> call = shareService.pinlundate(shareId);
         call.enqueue(new Callback<PinLunOneModel>() {
             @Override
             public void onResponse(Call<PinLunOneModel> call, Response<PinLunOneModel> response) {
