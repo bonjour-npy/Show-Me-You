@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--group标签表示以下item为一组-->
+    <group android:checkableBehavior="single">
+        <!--android:checkableBehavior="single" 设置组中item只能单选-->
+        <item
+            android:id="@+id/logout"
+            android:title="Logout" />
+        <item
+            android:id="@+id/refresh"
+            android:title="Refresh" />
+    </group>
+</menu>

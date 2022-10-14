@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".activity.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/APPTile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="SHOW ME YOU"
+        android:textColor="@color/white"
+        android:textSize="45sp"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/APPTile" />
+
+    <ViewFlipper
+        android:id="@+id/Run_textid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:autoStart="true"
+        android:background="@drawable/warning_bg"
+        android:flipInterval="1800"
+        android:inAnimation="@anim/slide_in_bottom"
+        android:outAnimation="@anim/slide_out_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageIcon">
+
+        <TextView
+            android:id="@+id/tv_warning_content1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="你好!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/tv_warning_content2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Bonjour!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/tv_warning_content5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="안녕하세요!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/tv_warning_content6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="здравей!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/tv_warning_content3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Привет!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif" />
+
+        <TextView
+            android:id="@+id/tv_warning_content4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="middle"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Howdy!"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:typeface="serif" />
+
+    </ViewFlipper>
+
+    <EditText
+        android:id="@+id/account"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_background"
+        android:hint="@string/main_email_hint"
+        android:paddingLeft="16dp"
+        android:singleLine="true"
+        android:textColor="@color/purple_700"
+        android:textSize="16dp"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Run_textid" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rounded_background"
+        android:hint="@string/main_password_hint"
+        android:inputType="textPassword"
+        android:paddingLeft="16dp"
+        android:textColor="@color/purple_500"
+        android:textSize="16dp"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account" />
+
+    <Button
+        android:id="@+id/signin"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/check"
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
+    <Button
+        android:id="@+id/registered"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/check"
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:text="Register"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:typeface="serif"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.PhotoShare" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_500</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/purple_200</item>
+        <item name="colorSecondaryVariant">@color/purple_500</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:typeface">serif</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/purple_500</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="spinner">
+        <item name="android:textSize">15sp</item>
+    </style>
+</resources>
