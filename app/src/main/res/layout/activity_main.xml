@@ -14,7 +14,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-
     <TextView
         android:id="@+id/APPTile"
         android:layout_width="wrap_content"
@@ -39,10 +38,10 @@
 
     <ViewFlipper
         android:id="@+id/Run_textid"
-        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
         android:autoStart="true"
         android:background="@drawable/warning_bg"
         android:flipInterval="1800"
@@ -50,7 +49,7 @@
         android:outAnimation="@anim/slide_out_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageIcon" >
+        app:layout_constraintTop_toBottomOf="@id/imageIcon">
 
         <TextView
             android:id="@+id/tv_warning_content1"
@@ -62,7 +61,7 @@
             android:text="你好!"
             android:textColor="@color/white"
             android:textSize="30sp"
-            android:typeface="serif"/>
+            android:typeface="serif" />
 
         <TextView
             android:id="@+id/tv_warning_content2"
@@ -74,7 +73,7 @@
             android:text="Bonjour!"
             android:textColor="@color/white"
             android:textSize="30sp"
-            android:typeface="serif"/>
+            android:typeface="serif" />
 
         <TextView
             android:id="@+id/tv_warning_content5"
@@ -86,7 +85,7 @@
             android:text="안녕하세요!"
             android:textColor="@color/white"
             android:textSize="30sp"
-            android:typeface="serif"/>
+            android:typeface="serif" />
 
         <TextView
             android:id="@+id/tv_warning_content6"
@@ -98,7 +97,7 @@
             android:text="здравей!"
             android:textColor="@color/white"
             android:textSize="30sp"
-            android:typeface="serif"/>
+            android:typeface="serif" />
 
         <TextView
             android:id="@+id/tv_warning_content3"
@@ -110,7 +109,7 @@
             android:text="Привет!"
             android:textColor="@color/white"
             android:textSize="30sp"
-            android:typeface="serif"/>
+            android:typeface="serif" />
 
         <TextView
             android:id="@+id/tv_warning_content4"
@@ -122,7 +121,7 @@
             android:text="Howdy!"
             android:textColor="@color/white"
             android:textSize="30sp"
-            android:typeface="serif"/>
+            android:typeface="serif" />
 
     </ViewFlipper>
 
@@ -138,6 +137,7 @@
         android:paddingLeft="16dp"
         android:singleLine="true"
         android:textColor="@color/purple_700"
+        android:textSize="16dp"
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,10 +151,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_background"
-        android:textColor="@color/purple_500"
         android:hint="@string/main_password_hint"
         android:inputType="textPassword"
         android:paddingLeft="16dp"
+        android:textColor="@color/purple_500"
+        android:textSize="16dp"
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -2,8 +2,8 @@
     <string name="app_name">Show Me You</string>
     <string name="title_homepage">HomePage</string>
     <string name="title_find">Moments</string>
-    <string name="title_mine">Me</string>
-    <string name="hello_blank_fragment">Me</string>
+    <string name="title_mine">Personal</string>
+    <string name="hello_blank_fragment">Personal</string>
     <string name="title_activity_share">Show Me You</string>
     <string name="main_email_hint">Please input your account or register</string>
     <string name="main_password_hint">Please input your password or register</string>

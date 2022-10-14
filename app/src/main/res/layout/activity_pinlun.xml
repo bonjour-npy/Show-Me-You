@@ -24,6 +24,7 @@
         android:id="@+id/fabiao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="发表评论"/>
+        android:text="Leave this comment"
+        android:textSize="16dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

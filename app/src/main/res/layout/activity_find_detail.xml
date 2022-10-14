@@ -31,7 +31,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Leave your comments ~"
+        android:text="Comments Section"
         android:textColor="@color/black"
         android:textSize="30dp"/>
 
@@ -45,7 +45,8 @@
         android:id="@+id/add_pinlun"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add this comment"
+        android:textSize="20dp"
+        android:text="Add Comments"
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

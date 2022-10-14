@@ -68,7 +68,7 @@ public class ShareActivity extends AppCompatActivity {
         //显示 tool_bar左侧按钮
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //设置 tool_bar左侧按钮图标
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_notifications_black_24dp);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home_black_24dp);
         //设置 note_group为默认选中
         navView.setCheckedItem(R.id.refresh);
     }
@@ -82,7 +82,6 @@ public class ShareActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.refresh:
                         Toast.makeText(getApplication(), "Refreshing", Toast.LENGTH_SHORT).show();
-
                         break;
                 }
                 //关闭 滑动菜单
