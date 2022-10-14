@@ -52,17 +52,17 @@ public class UploadActivity extends AppCompatActivity {
 
     private final Gson gson = new Gson();
 
-    ArrayList<File> files=new ArrayList<File>();
+    ArrayList<File> files = new ArrayList<File>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityUploadBinding=ActivityUploadBinding.inflate(getLayoutInflater());
-        View view=activityUploadBinding.getRoot();
+        activityUploadBinding = ActivityUploadBinding.inflate(getLayoutInflater());
+        View view = activityUploadBinding.getRoot();
         setContentView(view);
 
-        activityUploadBinding.rvImage.setLayoutManager(new GridLayoutManager(UploadActivity.this,3));
-        mAdapter=new LoadImageAdapter(UploadActivity.this);
+        activityUploadBinding.rvImage.setLayoutManager(new GridLayoutManager(UploadActivity.this, 3));
+        mAdapter = new LoadImageAdapter(UploadActivity.this);
         activityUploadBinding.rvImage.setAdapter(mAdapter);
 
         int hasWriteExternalPermission = ContextCompat.checkSelfPermission(this,
@@ -81,24 +81,24 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==REQUEST_CODE && data != null){
+        if (requestCode == REQUEST_CODE && data != null) {
 
-            ArrayList<String> images= data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
+            ArrayList<String> images = data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
 
-            for (String image:images){
+            for (String image : images) {
                 files.add(new File(image));
             }
-            Log.d(TAG, "onActivityResult: "+files);
+            Log.d(TAG, "onActivityResult: " + files);
             post();
 
             mAdapter.refresh(images);
         }
     }
 
-    private void post(){
+    private void post() {
         new Thread(() -> {
 
             // url路径
@@ -113,17 +113,17 @@ public class UploadActivity extends AppCompatActivity {
 
 
             MediaType MEDIA_TYPE_PNG = MediaType.parse("application/image/png; charset=utf-8");
-            MultipartBody.Builder mbody=new MultipartBody.Builder().setType(MultipartBody.FORM);
+            MultipartBody.Builder mbody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-            for(File file:files){
-                if(file.exists()){
-                    Log.i(TAG,file.getName());//经过测试，此处的名称不能相同，如果相同，只能保存最后一个图片，不知道那些同名的大神是怎么成功保存图片的。
-                    mbody.addFormDataPart("fileList",file.getName(), RequestBody.create(MEDIA_TYPE_PNG,file));
+            for (File file : files) {
+                if (file.exists()) {
+                    Log.i(TAG, file.getName());//经过测试，此处的名称不能相同，如果相同，只能保存最后一个图片，不知道那些同名的大神是怎么成功保存图片的。
+                    mbody.addFormDataPart("fileList", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
                 }
             }
 
 
-            RequestBody requestBody =mbody.build();
+            RequestBody requestBody = mbody.build();
             //请求组合创建
             Request request = new Request.Builder()
                     .url(url)
@@ -145,14 +145,14 @@ public class UploadActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         Gson gson = new Gson();
-                        LoadPhotoModel loadPhotoModel=gson.fromJson(response.body().string(),LoadPhotoModel.class);
+                        LoadPhotoModel loadPhotoModel = gson.fromJson(response.body().string(), LoadPhotoModel.class);
                         Log.d(TAG, loadPhotoModel.getData().getImageUrlList().toString());
-                        for (int i=0;i<loadPhotoModel.getData().getImageUrlList().size();i++){
+                        for (int i = 0; i < loadPhotoModel.getData().getImageUrlList().size(); i++) {
                             Log.d(TAG, loadPhotoModel.getData().getImageUrlList().get(i).toString());
                         }
 
-                        SharedPreferences sp=getSharedPreferences("photo",MODE_PRIVATE);
-                        sp.edit().putString("photo_id",loadPhotoModel.getData().getImageCode()).apply();
+                        SharedPreferences sp = getSharedPreferences("photo", MODE_PRIVATE);
+                        sp.edit().putString("photo_id", loadPhotoModel.getData().getImageCode()).apply();
                         //在这里获取唯一的图片组编号，直接将两个接口合并
 
                     }
@@ -161,13 +161,13 @@ public class UploadActivity extends AppCompatActivity {
                 files.clear();
                 //请求完成一次之后就给list置空，避免图片的叠加提交
 
-            }catch (NetworkOnMainThreadException ex){
+            } catch (NetworkOnMainThreadException ex) {
                 ex.printStackTrace();
             }
         }).start();
     }
 
-    private void getclock(){
+    private void getclock() {
 
 
         activityUploadBinding.btnUnlimited.setOnClickListener(new View.OnClickListener() {
@@ -211,38 +211,38 @@ public class UploadActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                PhotoService photoService= RetrofitUtils.getInstance().getRetrofit().create(PhotoService.class);
+                PhotoService photoService = RetrofitUtils.getInstance().getRetrofit().create(PhotoService.class);
 
-                String title=activityUploadBinding.uploadTitle.getText().toString();
-                String content=activityUploadBinding.uploadText.getText().toString();
-                SharedPreferences sp_user=getSharedPreferences("user",MODE_PRIVATE);
-                String user_id = sp_user.getString("id","未找到用户ID");
-                SharedPreferences sp_photo=getSharedPreferences("photo",MODE_PRIVATE);
-                String photo_id = sp_photo.getString("photo_id","未找到图片ID");
+                String title = activityUploadBinding.uploadTitle.getText().toString();
+                String content = activityUploadBinding.uploadText.getText().toString();
+                SharedPreferences sp_user = getSharedPreferences("user", MODE_PRIVATE);
+                String user_id = sp_user.getString("id", "未找到用户ID");
+                SharedPreferences sp_photo = getSharedPreferences("photo", MODE_PRIVATE);
+                String photo_id = sp_photo.getString("photo_id", "未找到图片ID");
                 //请求需要 内容、标题、图片ID、用户ID
 
                 Log.d(TAG, "上传图片分享的请求");
 
-                ShareAdd shareAdd=new ShareAdd();
+                ShareAdd shareAdd = new ShareAdd();
                 shareAdd.setContent(content);
                 shareAdd.setpUserId(Double.parseDouble(user_id));
                 shareAdd.setimageCode(Double.parseDouble(photo_id));
                 shareAdd.setTitle(title);
 
-                retrofit2.Call<UploadAll> call=photoService.uploadall(shareAdd);
+                retrofit2.Call<UploadAll> call = photoService.uploadall(shareAdd);
                 call.enqueue(new retrofit2.Callback<UploadAll>() {
                     @Override
                     public void onResponse(retrofit2.Call<UploadAll> call, retrofit2.Response<UploadAll> response) {
-                        if (response.body().getCode()==200){
-                            Log.d(TAG, "上传成功"+user_id);
-                            Toast toast=Toast.makeText(getApplicationContext(),"上传成功",Toast.LENGTH_SHORT);
+                        if (response.body().getCode() == 200) {
+                            Log.d(TAG, "上传成功" + user_id);
+                            Toast toast = Toast.makeText(getApplicationContext(), "上传成功", Toast.LENGTH_SHORT);
                             toast.show();
                         }
                     }
 
                     @Override
                     public void onFailure(retrofit2.Call<UploadAll> call, Throwable t) {
-                        Log.d(TAG, "onFailure: 上传失败"+t);
+                        Log.d(TAG, "onFailure: 上传失败" + t);
                         t.printStackTrace();
                     }
                 });
@@ -252,40 +252,40 @@ public class UploadActivity extends AppCompatActivity {
         activityUploadBinding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PhotoService photoService= RetrofitUtils.getInstance().getRetrofit().create(PhotoService.class);
+                PhotoService photoService = RetrofitUtils.getInstance().getRetrofit().create(PhotoService.class);
 
-                String title=activityUploadBinding.uploadTitle.getText().toString();
-                String content=activityUploadBinding.uploadText.getText().toString();
-                SharedPreferences sp_user=getSharedPreferences("user",MODE_PRIVATE);
-                String user_id = sp_user.getString("id","未找到用户ID");
-                SharedPreferences sp_photo=getSharedPreferences("photo",MODE_PRIVATE);
-                String photo_id = sp_photo.getString("photo_id","未找到图片ID");
+                String title = activityUploadBinding.uploadTitle.getText().toString();
+                String content = activityUploadBinding.uploadText.getText().toString();
+                SharedPreferences sp_user = getSharedPreferences("user", MODE_PRIVATE);
+                String user_id = sp_user.getString("id", "未找到用户ID");
+                SharedPreferences sp_photo = getSharedPreferences("photo", MODE_PRIVATE);
+                String photo_id = sp_photo.getString("photo_id", "未找到图片ID");
                 //请求需要 内容、标题、图片ID、用户ID
 
                 Log.d(TAG, "保存草稿");
 
-                ShareAdd shareAdd=new ShareAdd();
+                ShareAdd shareAdd = new ShareAdd();
                 shareAdd.setContent(content);
                 shareAdd.setpUserId(Double.parseDouble(user_id));
                 shareAdd.setimageCode(Double.parseDouble(photo_id));
                 shareAdd.setTitle(title);
 
-                retrofit2.Call<UploadAll> call=photoService.save_photo(shareAdd);
+                retrofit2.Call<UploadAll> call = photoService.save_photo(shareAdd);
                 call.enqueue(new retrofit2.Callback<UploadAll>() {
                     @Override
                     public void onResponse(retrofit2.Call<UploadAll> call, retrofit2.Response<UploadAll> response) {
-                        if (response.body().getCode()==200){
-                            Log.d(TAG, "保存草稿成功"+user_id+" "+photo_id);
-                            Intent intent=new Intent(UploadActivity.this, ShareActivity.class);
+                        if (response.body().getCode() == 200) {
+                            Log.d(TAG, "保存草稿成功" + user_id + " " + photo_id);
+                            Intent intent = new Intent(UploadActivity.this, ShareActivity.class);
                             startActivity(intent);
-                            Toast toast=Toast.makeText(getApplicationContext(),"保存草稿成功",Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(), "保存草稿成功", Toast.LENGTH_SHORT);
                             toast.show();
                         }
                     }
 
                     @Override
                     public void onFailure(retrofit2.Call<UploadAll> call, Throwable t) {
-                        Log.d(TAG, "onFailure: 保存草稿失败"+t);
+                        Log.d(TAG, "onFailure: 保存草稿失败" + t);
                         t.printStackTrace();
                     }
                 });

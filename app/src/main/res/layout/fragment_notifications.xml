@@ -11,9 +11,33 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/profile_grad_color_bg"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/addShare"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/gray_background"
+                    android:text="Draft Box" />
+
+                <Button
+                    android:id="@+id/upload"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/gray_background"
+                    android:text="Upload" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
@@ -31,36 +55,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <Button
-                        android:id="@+id/addShare"
-                        android:layout_width="130dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="46dp"
-                        android:background="@drawable/gray_background"
-                        android:text="Draft Box"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout3"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/upload"
-                        android:layout_width="130dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="30dp"
-                        android:background="@drawable/gray_background"
-                        android:text="Upload"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout3"
-                        app:layout_constraintTop_toBottomOf="@+id/addShare" />
-
                     <LinearLayout
                         android:id="@+id/linearLayout3"
-                        android:layout_width="120dp"
-                        android:layout_height="100dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="35dp"
@@ -79,9 +77,9 @@
 
                         <TextView
                             android:id="@+id/profile_user_id"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Account: 001"
+                            android:text="Account: 2366353971"
                             android:textColor="@color/white"
                             android:textSize="17sp" />
 
@@ -99,28 +97,29 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_margin="35dp"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="44dp"
+                        android:layout_marginStart="200dp"
+                        android:layout_marginTop="50dp"
                         android:src="@drawable/icon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/personal_description"
-                        android:layout_width="350dp"
-                        android:layout_height="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
                         android:layout_marginStart="35dp"
                         android:layout_marginLeft="35dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="30dp"
                         android:text="This user leaves no words here"
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/avatar_icon" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="336dp"
-                        android:layout_height="90dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="7dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

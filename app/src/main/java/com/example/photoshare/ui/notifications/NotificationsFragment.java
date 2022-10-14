@@ -41,12 +41,12 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        SharedPreferences sh=getActivity().getSharedPreferences("user",0);
-        String user_id = sh.getString("id","未找到用户ID");
-        Log.d(TAG, "onCreateView: "+user_id);
+        SharedPreferences sh = getActivity().getSharedPreferences("user", 0);
+        String user_id = sh.getString("id", "Can't find user ID");
+        Log.d(TAG, "onCreateView: " + user_id);
 
         NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this,new NotificationsViewModelFactory(user_id)).get(NotificationsViewModel.class);
+                new ViewModelProvider(this, new NotificationsViewModelFactory(user_id)).get(NotificationsViewModel.class);
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -59,7 +59,7 @@ public class NotificationsFragment extends Fragment {
         binding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getContext(), UploadActivity.class);
+                Intent intent = new Intent(getContext(), UploadActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,13 +67,13 @@ public class NotificationsFragment extends Fragment {
         binding.addShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getContext(), AddShareActivity.class);
+                Intent intent = new Intent(getContext(), AddShareActivity.class);
                 startActivity(intent);
             }
         });
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MinePhotoAdapter minePhotoAdapter=new MinePhotoAdapter();
+        MinePhotoAdapter minePhotoAdapter = new MinePhotoAdapter();
         binding.recyclerView.setAdapter(minePhotoAdapter);
         notificationsViewModel.getArryList().observe(getViewLifecycleOwner(), new Observer<List<RecordsBean>>() {
             @Override

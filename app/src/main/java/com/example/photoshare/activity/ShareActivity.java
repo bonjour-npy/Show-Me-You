@@ -40,16 +40,9 @@ public class ShareActivity extends AppCompatActivity {
         binding = ActivityShareBinding.inflate(getLayoutInflater());
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(binding.getRoot());
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_dashboard, R.id.navigation_home, R.id.navigation_notifications)
-                .build();
-
+        // shareactivity是如何加载图片的？每次intent进入fragment时都自动加载吗？
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_share);
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         init();
