@@ -28,7 +28,6 @@ import com.google.android.material.navigation.NavigationView;
 public class ShareActivity extends AppCompatActivity {
 
     private ActivityShareBinding binding;
-
     private Toolbar tool_bar;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
@@ -74,7 +73,6 @@ public class ShareActivity extends AppCompatActivity {
                         break;
                     case R.id.refresh:
                         Toast.makeText(getApplication(), "Refreshing", Toast.LENGTH_SHORT).show();
-
                         break;
                 }
                 //关闭 滑动菜单

@@ -44,13 +44,10 @@ public class AddShareActivity extends AppCompatActivity {
     static final int SUCCESS = 0;
     static final int FAILURE = 1;
 
-    Handler handler = new Handler(Looper.getMainLooper())
-    {
+    Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
-        public void handleMessage(@NonNull Message msg)
-        {
-            switch (msg.what)
-            {
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what) {
                 case SUCCESS:
                     caoGaoAdapter.notifyDataSetChanged();
                     break;
@@ -65,25 +62,25 @@ public class AddShareActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityAddShareBinding=ActivityAddShareBinding.inflate(getLayoutInflater());
-        View view=activityAddShareBinding.getRoot();
+        activityAddShareBinding = ActivityAddShareBinding.inflate(getLayoutInflater());
+        View view = activityAddShareBinding.getRoot();
         setContentView(view);
 
-        SharedPreferences sp_user=getSharedPreferences("user",MODE_PRIVATE);
-        String user_id = sp_user.getString("id","未找到用户ID");
+        SharedPreferences sp_user = getSharedPreferences("user", MODE_PRIVATE);
+        String user_id = sp_user.getString("id", "未找到用户ID");
 
-        caoGaoList=new ArrayList<>();
-        activityAddShareBinding.recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        caoGaoAdapter=new CaoGaoAdapter(AddShareActivity.this,caoGaoList);
+        caoGaoList = new ArrayList<>();
+        activityAddShareBinding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        caoGaoAdapter = new CaoGaoAdapter(AddShareActivity.this, caoGaoList);
         activityAddShareBinding.recyclerView.setAdapter(caoGaoAdapter);
-        
 
-        PhotoService photoService= RetrofitUtils.getInstance().getRetrofit().create(PhotoService.class);
-        retrofit2.Call<CaoGaoModel> call=photoService.save_photo(0,10,user_id);
+
+        PhotoService photoService = RetrofitUtils.getInstance().getRetrofit().create(PhotoService.class);
+        retrofit2.Call<CaoGaoModel> call = photoService.save_photo(0, 10, user_id);
         call.enqueue(new Callback<CaoGaoModel>() {
             @Override
             public void onResponse(Call<CaoGaoModel> call, Response<CaoGaoModel> response) {
-                if (response.body().getData()!=null){
+                if (response.body().getData() != null) {
                     caoGaoList.addAll(response.body().getData().getRecords());
                 }
                 handler.sendEmptyMessage(SUCCESS);

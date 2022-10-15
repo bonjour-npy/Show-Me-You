@@ -31,6 +31,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.Intent;
+
+import com.example.photoshare.activity.FindMineDetailActivity;
+
 public class MineLikeAdapter extends RecyclerView.Adapter<MineLikeAdapter.MineLikeViewHolder> {
 
     List<com.example.photoshare.model.minelike.RecordsBean> sharelist = new ArrayList<>();
@@ -116,6 +120,18 @@ public class MineLikeAdapter extends RecyclerView.Adapter<MineLikeAdapter.MineLi
                     holder.dianzan.setBackgroundResource(R.mipmap.zan_unclick);
                     undianzan(sharelist, position);
                 }
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), FindMineDetailActivity.class);
+                intent.putExtra("id", recordsBean.getId());
+                intent.putExtra("follow", recordsBean.getPUserId());
+                intent.putExtra("if_follow", recordsBean.getHasFocus().toString());
+                intent.putExtra("photolist", recordsBean);
+                Log.d(TAG, "onClick: " + recordsBean.getHasFocus().toString());
+                holder.itemView.getContext().startActivity(intent);
             }
         });
     }

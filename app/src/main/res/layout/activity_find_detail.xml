@@ -50,16 +50,17 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="5dp"
-            android:typeface="serif"
             android:background="@drawable/gray_background"
             android:text="Follow"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:typeface="serif"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

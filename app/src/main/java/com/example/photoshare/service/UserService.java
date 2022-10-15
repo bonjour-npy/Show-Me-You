@@ -15,6 +15,6 @@ public interface UserService {
     Call<UserModel> register(@Body User user);
 
     @POST("member/photo/user/login")
-    Call<UserModel> login(@Query("password") int password,@Query("username") int username);
+    Call<UserModel> login(@Query("password") int password, @Query("username") int username);
 
 }

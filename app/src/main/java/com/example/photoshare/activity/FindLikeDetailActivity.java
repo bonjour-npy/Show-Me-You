@@ -1,15 +1,5 @@
 package com.example.photoshare.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.photoshare.R;
-import com.example.photoshare.model.share.RecordsBean;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,12 +7,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.photoshare.R;
 import com.example.photoshare.adapter.FindDetailAdapter;
 import com.example.photoshare.adapter.PinlunOneAdapter;
 import com.example.photoshare.databinding.ActivityFindDetailBinding;
 import com.example.photoshare.model.fabu.FabuModel;
 import com.example.photoshare.model.pinlun1.PinLunOneModel;
 import com.example.photoshare.model.pinlunback.PinLunBackModel;
+import com.example.photoshare.model.minelike.RecordsBean;
 import com.example.photoshare.model.shoucang.ShoucangModel;
 import com.example.photoshare.postentity.PinLun;
 import com.example.photoshare.service.MineService;
@@ -32,25 +32,28 @@ import com.example.photoshare.utils.RetrofitUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FindDetailActivity extends AppCompatActivity {
+public class FindLikeDetailActivity extends AppCompatActivity {
 
     private ActivityFindDetailBinding activityFindDetailBinding;
+
     private FindDetailAdapter mAdapter;
     //图片展示适配器
 
     private String caogao_title;
     private String caogao_content;
 
+    private String id;
+
+
     private ArrayList<String> images = new ArrayList<String>();
     private static final String TAG = "CaoGaoDetailActivity";
+    PinlunOneAdapter pinlunOneAdapter;
 
-    public String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +66,12 @@ public class FindDetailActivity extends AppCompatActivity {
         String sharedate = intent.getStringExtra("id");
         String share_puserid = intent.getStringExtra("follow");
         String share_if_follow = intent.getStringExtra("if_follow");
-        recordsBean=(RecordsBean)intent.getSerializableExtra("photolist");
+        recordsBean = (RecordsBean) intent.getSerializableExtra("photolist");
+
         SharedPreferences sh = getSharedPreferences("user", 0);
-        String user_id = sh.getString("id", "Can't find user ID");
+        String user_id = sh.getString("id", "未找到用户ID");
         images = (ArrayList<String>) recordsBean.getImageUrlList();
         Log.d(TAG, "onCreate: " + images);
-//        String share_id = sh.getString("shareId", "Can't find share_id");
 
         if (share_if_follow.equals("false")) {
             activityFindDetailBinding.detailFollow.setText("Follow");
@@ -79,13 +82,20 @@ public class FindDetailActivity extends AppCompatActivity {
         }
 
         find_content(sharedate, user_id);
-        Glide.with(FindDetailActivity.this)
+
+        Glide.with(FindLikeDetailActivity.this)
                 .load(R.drawable.icon)
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .into(activityFindDetailBinding.detailIcon);
+
         activityFindDetailBinding.detailFollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //在需要的事件中执行如下代码，发送刷新数据的广播
+                Intent intent2 = new Intent("zachary");
+                intent2.putExtra("refreshInfo", "yes");
+                LocalBroadcastManager.getInstance(FindLikeDetailActivity.this).sendBroadcast(intent2);
 
                 if (share_if_follow.equals("false")) {
                     MineService mineService = RetrofitUtils.getInstance().getRetrofit().create(MineService.class);
@@ -93,14 +103,14 @@ public class FindDetailActivity extends AppCompatActivity {
                     call.enqueue(new Callback<ShoucangModel>() {
                         @Override
                         public void onResponse(Call<ShoucangModel> call, Response<ShoucangModel> response) {
-                            Toast.makeText(FindDetailActivity.this, "关注成功", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onResponse: " + response.body().getCode());
+                            Toast.makeText(FindLikeDetailActivity.this, "关注成功", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onResponse: " + response.body().getMsg() + response.body().getCode());
                             activityFindDetailBinding.detailFollow.setText("Followed");
                         }
 
                         @Override
                         public void onFailure(Call<ShoucangModel> call, Throwable t) {
-
+                            Log.d(TAG, "关注请求失败");
                         }
                     });
                 } else {
@@ -109,40 +119,43 @@ public class FindDetailActivity extends AppCompatActivity {
                     call.enqueue(new Callback<ShoucangModel>() {
                         @Override
                         public void onResponse(Call<ShoucangModel> call, Response<ShoucangModel> response) {
-                            Toast.makeText(FindDetailActivity.this, "已取消关注", Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "onResponse: " + response.body().getCode());
+                            Toast.makeText(FindLikeDetailActivity.this, "已取消关注", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onResponse: " + response.body().getMsg());
                             activityFindDetailBinding.detailFollow.setText("Follow");
                         }
 
                         @Override
                         public void onFailure(Call<ShoucangModel> call, Throwable t) {
+
                         }
                     });
+
                 }
+
             }
         });
 
         activityFindDetailBinding.addPinlun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 PinLun pinLun = new PinLun();
                 pinLun.setContent(activityFindDetailBinding.pinlunContent.getText().toString());
-                pinLun.setUserName("倪培洋".toString());
+                pinLun.setUserName("Umbrella".toString());
                 pinLun.setUserId(user_id);
                 Intent intent = getIntent();
                 pinLun.setShareId(id);
                 Log.d(TAG, "" + user_id + " " + intent.getStringExtra("id"));
+
                 ShareService shareService = RetrofitUtils.getInstance().getRetrofit().create(ShareService.class);
                 Call<PinLunBackModel> call = shareService.pinlunfabiao(pinLun);
                 call.enqueue(new Callback<PinLunBackModel>() {
                     @Override
                     public void onResponse(Call<PinLunBackModel> call, Response<PinLunBackModel> response) {
                         if (response.body().getCode() == 200) {
-                            Toast.makeText(FindDetailActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
-                            Intent intent1 = new Intent(FindDetailActivity.this, FindDetailActivity.class);
-                            intent1.putExtra("id", intent.getStringExtra("id"));
-                            startActivity(intent1);
+                            Toast.makeText(FindLikeDetailActivity.this, "评论成功", Toast.LENGTH_SHORT).show();
                         }
+                        pinlunOneAdapter.notifyItemRangeChanged(0, 10);
                     }
 
                     @Override
@@ -152,6 +165,7 @@ public class FindDetailActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
 
     public void find_content(String sharedate, String user_id) {
@@ -160,9 +174,10 @@ public class FindDetailActivity extends AppCompatActivity {
         call.enqueue(new retrofit2.Callback<>() {
             @Override
             public void onResponse(Call<FabuModel> call, Response<FabuModel> response) {
-                caogao_content = "Content: " + response.body().getData().getContent();
-                caogao_title = "Title: " + response.body().getData().getTitle();
+                caogao_content = response.body().getData().getContent();
+                caogao_title = response.body().getData().getTitle();
                 activityFindDetailBinding.detailUsername.setText(response.body().getData().getTitle());
+
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 long times = Long.parseLong(response.body().getData().getCreateTime());
                 String str = format.format(times);
@@ -179,8 +194,8 @@ public class FindDetailActivity extends AppCompatActivity {
                 activityFindDetailBinding.caogaoContent.setText(caogao_content);
                 Log.d(TAG, "onResponse: " + images);
 
-                activityFindDetailBinding.caogaoRv.setLayoutManager(new GridLayoutManager(FindDetailActivity.this, 3));
-                mAdapter = new FindDetailAdapter(FindDetailActivity.this, images);
+                activityFindDetailBinding.caogaoRv.setLayoutManager(new GridLayoutManager(FindLikeDetailActivity.this, 3));
+                mAdapter = new FindDetailAdapter(FindLikeDetailActivity.this, images);
                 activityFindDetailBinding.caogaoRv.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
                 id = response.body().getData().getId();
@@ -202,10 +217,11 @@ public class FindDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PinLunOneModel> call, Response<PinLunOneModel> response) {
                 if (response.body().getData().getRecords().size() == 0) {
-                    Toast.makeText(FindDetailActivity.this, "暂无评论", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FindLikeDetailActivity.this, "暂无评论", Toast.LENGTH_SHORT).show();
                 }
-                activityFindDetailBinding.pinlunRv.setLayoutManager(new LinearLayoutManager(FindDetailActivity.this));
-                PinlunOneAdapter pinlunOneAdapter = new PinlunOneAdapter(response.body().getData().getRecords());
+
+                activityFindDetailBinding.pinlunRv.setLayoutManager(new LinearLayoutManager(FindLikeDetailActivity.this));
+                pinlunOneAdapter = new PinlunOneAdapter(response.body().getData().getRecords());
                 activityFindDetailBinding.pinlunRv.setAdapter(pinlunOneAdapter);
                 pinlunOneAdapter.notifyDataSetChanged();
 

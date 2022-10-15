@@ -68,10 +68,10 @@ public class UploadActivity extends AppCompatActivity {
         int hasWriteExternalPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (hasWriteExternalPermission == PackageManager.PERMISSION_GRANTED) {
-            //预加载手机图片，加载图片前，请确保app有读取储存卡权限
+            // 预加载手机图片，加载图片前，请确保app有读取储存卡权限
             ImageSelector.preload(this);
         } else {
-            //没有权限，申请权限。
+            // 没有权限，申请权限。
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_WRITE_EXTERNAL_REQUEST_CODE);
         }
@@ -103,28 +103,25 @@ public class UploadActivity extends AppCompatActivity {
 
             // url路径
             String url = "http://47.107.52.7:88/member/photo/image/upload";
-
-            // 请求头
+            //-----------------------------上传图片的请求头--------------------------------------------
             Headers headers = new Headers.Builder()
-                    .add("appId", "7cf1a6087a58444ebf6c17ee75619a78")
-                    .add("appSecret", "523704e942d7c47f44646ab8d2de7b7e3a8a6")
+                    .add("appId", "fd558310540f4ef9ad28d6c52e0015cf")
+                    .add("appSecret", "13997193fbadd4e5c466e8bfc381f1882dacc")
                     .add("Accept", "application/json, text/plain, */*")
                     .build();
-
-
+            // okhttp协议
             MediaType MEDIA_TYPE_PNG = MediaType.parse("application/image/png; charset=utf-8");
             MultipartBody.Builder mbody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
             for (File file : files) {
                 if (file.exists()) {
-                    Log.i(TAG, file.getName());//经过测试，此处的名称不能相同，如果相同，只能保存最后一个图片，不知道那些同名的大神是怎么成功保存图片的。
+                    Log.i(TAG, file.getName());
                     mbody.addFormDataPart("fileList", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
                 }
             }
 
-
             RequestBody requestBody = mbody.build();
-            //请求组合创建
+            // 请求组合创建
             Request request = new Request.Builder()
                     .url(url)
                     // 将请求头加至请求中
@@ -133,8 +130,9 @@ public class UploadActivity extends AppCompatActivity {
                     .build();
 
             try {
+                // OkHttp协议异步请求，新开一个线程
                 OkHttpClient client = new OkHttpClient();
-                //发起请求，传入callback进行回调
+                // 发起请求，传入callback进行回调
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -150,7 +148,6 @@ public class UploadActivity extends AppCompatActivity {
                         for (int i = 0; i < loadPhotoModel.getData().getImageUrlList().size(); i++) {
                             Log.d(TAG, loadPhotoModel.getData().getImageUrlList().get(i).toString());
                         }
-
                         SharedPreferences sp = getSharedPreferences("photo", MODE_PRIVATE);
                         sp.edit().putString("photo_id", loadPhotoModel.getData().getImageCode()).apply();
                         //在这里获取唯一的图片组编号，直接将两个接口合并

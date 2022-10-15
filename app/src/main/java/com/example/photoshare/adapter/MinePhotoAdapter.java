@@ -23,6 +23,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
+
+import com.example.photoshare.activity.FindDetailActivity;
+import com.example.photoshare.activity.FindMineDetailActivity;
+
+import java.io.Serializable;
+
 public class MinePhotoAdapter extends RecyclerView.Adapter<MinePhotoAdapter.MainPhotoViewHolder> {
     List<RecordsBean> list = new ArrayList<>();
     private static final String TAG = "MinePhotoAdapter";
@@ -58,6 +65,18 @@ public class MinePhotoAdapter extends RecyclerView.Adapter<MinePhotoAdapter.Main
                         .into(holder.photo);
             }
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), FindMineDetailActivity.class);
+                intent.putExtra("id", recordsBean.getId());
+                intent.putExtra("follow", recordsBean.getPUserId());
+                intent.putExtra("if_follow", recordsBean.getHasFocus().toString());
+                intent.putExtra("photolist", recordsBean);
+                Log.d(TAG, "onClick: " + recordsBean.getHasFocus().toString());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
 
     }
 

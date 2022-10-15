@@ -35,6 +35,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.os.Bundle;
+
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.newsViewHolder> {
 
     List<RecordsBean> sharelist = new ArrayList<>();
@@ -50,6 +52,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.newsViewHolder
 
     MineService mineService = RetrofitUtils.getInstance().getRetrofit().create(MineService.class);
 
+    // adapater的sharelist
     public void setSharelist(List<RecordsBean> shares) {
         this.sharelist = shares;
     }
@@ -130,6 +133,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.newsViewHolder
                 intent.putExtra("id", share.getId());
                 intent.putExtra("follow", share.getPUserId());
                 intent.putExtra("if_follow", share.getHasFocus().toString());
+                intent.putExtra("photolist", share);
                 Log.d(TAG, "onClick: " + share.getHasFocus().toString());
                 holder.itemView.getContext().startActivity(intent);
             }

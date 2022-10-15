@@ -15,11 +15,22 @@ import com.example.photoshare.activity.FindDetailActivity;
 
 import java.util.ArrayList;
 
+import com.example.photoshare.activity.FindLikeDetailActivity;
+import com.example.photoshare.activity.FindMineDetailActivity;
+
 public class FindDetailAdapter extends RecyclerView.Adapter<LoadImageAdapter.ViewHolder> {
     ArrayList<String> fabuModelList;
     private static final String TAG = "CaoGaoDetailAdapter";
 
     public FindDetailAdapter(FindDetailActivity findDetailActivity, ArrayList<String> fabuModels) {
+        this.fabuModelList = fabuModels;
+    }
+
+    public FindDetailAdapter(FindMineDetailActivity findDetailActivity, ArrayList<String> fabuModels) {
+        this.fabuModelList = fabuModels;
+    }
+
+    public FindDetailAdapter(FindLikeDetailActivity findDetailActivity, ArrayList<String> fabuModels) {
         this.fabuModelList = fabuModels;
     }
 

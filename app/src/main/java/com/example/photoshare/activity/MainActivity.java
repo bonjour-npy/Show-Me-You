@@ -94,18 +94,14 @@ public class MainActivity extends AppCompatActivity {
                 .load(R.drawable.icon)
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .into(imageView);
-
-
     }
 
     private void signin() {
         UserService userservice = RetrofitUtils.getInstance().getRetrofit().create(UserService.class);
         Integer a = Integer.parseInt(password);
         Integer b = Integer.parseInt(username);
-//        String nam=username.toString();
-//        String pas=password.toString();
         Call<UserModel> call = userservice.login(a, b);
-        //同步调用
+        // 同步调用
         call.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -118,11 +114,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Log.e(TAG, b + "post异步请求成功" + response.body().getData().getId());
 
+                    // 将之后需要使用的用户信息放到SharedPareced中，便于分享数据的实现
                     SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
                     sp.edit().putString("id", response.body().getData().getId()).apply();
                     sp.edit().putString("name", response.body().getData().getUsername()).apply();
                     sp.edit().putString("password", String.valueOf(response.body().getData().getPassword())).apply();
-                    //将之后需要使用的用户信息放到SharedPareced中，便于分享数据的实现
+
 
                 } catch (Exception e) {
                     e.printStackTrace();

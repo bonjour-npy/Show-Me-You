@@ -1,8 +1,6 @@
 package com.example.photoshare.model.caogao;
 
 public class CaoGaoModel {
-
-
     private Integer code;
     private String msg;
     private DataBean data;

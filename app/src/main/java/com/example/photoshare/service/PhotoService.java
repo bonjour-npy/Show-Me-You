@@ -27,7 +27,7 @@ public interface PhotoService {
             "Content-Type:application/json"
     })
     @POST("member/photo/image/upload")
-    Call<LoadPhotoModel> uploadphoto(@Query("fileList") ArrayList<File> fileList );
+    Call<LoadPhotoModel> uploadphoto(@Query("fileList") ArrayList<File> fileList);
     //上传图片文件，获取图片组唯一标识码
 
     @POST("member/photo/share/add")
@@ -40,7 +40,7 @@ public interface PhotoService {
 
     //1561985398480179200
     @GET("member/photo/share/save")
-    Call<CaoGaoModel> save_photo(@Query("current") int current,@Query("size") int size,@Query("userId") String userId);
+    Call<CaoGaoModel> save_photo(@Query("current") int current, @Query("size") int size, @Query("userId") String userId);
     //保存用户分享的动态
 
     @POST("member/photo/share/save")
@@ -53,6 +53,6 @@ public interface PhotoService {
     Call<UserModel> fabu(@Body FaBu faBu);
 
     @GET("member/photo/share/myself")
-    Call<CaoGaoModel> myself(@Query("current") int current,@Query("size") int size,@Query("userId") String userId);
+    Call<CaoGaoModel> myself(@Query("current") int current, @Query("size") int size, @Query("userId") String userId);
     //current=3&size=5&userId=1561985398480179200"
 }
