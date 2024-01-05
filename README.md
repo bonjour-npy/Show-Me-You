@@ -1,5 +1,6 @@
 # Show Me You: Photo Sharing Platform
-Android Development大作业：图片分享平台
+
+`Android Development大作业：图片分享平台`
 
 指导老师：[张哲](https://github.com/Bamboo-fly)、贾飞
 
